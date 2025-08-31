@@ -43,14 +43,14 @@ const Footer = () => {
           See you there!
         </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-6 sm:mb-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-lg font-bold mb-4 font-rajdhani">Innovate Orange</h3>
+            <h3 className="text-base sm:text-lg font-bold mb-3 sm:mb-4 font-rajdhani">Innovate Orange</h3>
             <div className="flex gap-3 justify-center">
               {socialLinks.map((social, index) => (
                 <motion.a
@@ -78,7 +78,7 @@ const Footer = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-lg font-bold mb-4 font-rajdhani">Quick Links</h3>
+            <h3 className="text-base sm:text-lg font-bold mb-3 sm:mb-4 font-rajdhani">Quick Links</h3>
             <ul className="space-y-2">
               {["About", "Schedule", "Team", "FAQ"].map((link) => (
                 <li key={link}>
@@ -99,7 +99,7 @@ const Footer = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-lg font-bold mb-4 font-rajdhani">Contact</h3>
+            <h3 className="text-base sm:text-lg font-bold mb-3 sm:mb-4 font-rajdhani">Contact</h3>
             <ul className="space-y-2">
               <li>
                 <a 

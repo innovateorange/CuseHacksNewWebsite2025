@@ -84,7 +84,8 @@ const Navbar = () => {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-white hover:text-primary-500 p-2"
+              className="text-white hover:text-primary-500 p-3 -m-1 min-h-[44px] min-w-[44px] flex items-center justify-center"
+              aria-label={isOpen ? 'Close menu' : 'Open menu'}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -100,12 +101,12 @@ const Navbar = () => {
           exit={{ opacity: 0, y: -10 }}
           className="md:hidden bg-[#0a0a1a]/95 backdrop-blur-md border-b border-primary-500/20"
         >
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          <div className="px-4 pt-4 pb-6 space-y-2">
             {navItems.map((item) => (
               <button
                 key={item.name}
                 onClick={() => scrollTo(item.href)}
-                className="text-white/80 hover:text-white block px-3 py-2 text-base font-medium w-full text-left hover:bg-primary-500/20 rounded-lg"
+                className="text-white/80 hover:text-white block px-4 py-3 text-base font-medium w-full text-left hover:bg-primary-500/20 rounded-lg min-h-[44px] flex items-center"
               >
                 {item.name}
               </button>
@@ -113,7 +114,7 @@ const Navbar = () => {
             {!loading && flags.projectSubmissionsEnabled && (
               <Link
                 to="/projects"
-                className="text-white/80 hover:text-white block px-3 py-2 text-base font-medium w-full text-left hover:bg-primary-500/20 rounded-lg"
+                className="text-white/80 hover:text-white block px-4 py-3 text-base font-medium w-full text-left hover:bg-primary-500/20 rounded-lg min-h-[44px] flex items-center"
                 onClick={() => setIsOpen(false)}
               >
                 Projects
@@ -122,7 +123,7 @@ const Navbar = () => {
             {!loading && flags.registrationEnabled && (
               <Link
                 to="/register"
-                className="text-white/80 hover:text-white block px-3 py-2 text-base font-medium w-full text-left hover:bg-primary-500/20 rounded-lg"
+                className="text-white/80 hover:text-white block px-4 py-3 text-base font-medium w-full text-left hover:bg-primary-500/20 rounded-lg min-h-[44px] flex items-center"
                 onClick={() => setIsOpen(false)}
               >
                 Register
@@ -131,7 +132,7 @@ const Navbar = () => {
             {!loading && flags.projectSubmissionsEnabled && (
               <Link
                 to="/submit"
-                className="bg-gradient-to-r from-primary-500 to-accent-500 text-white px-6 py-2 rounded-lg font-medium hover:opacity-90 transition-opacity w-full mt-4 block text-center"
+                className="bg-gradient-to-r from-primary-500 to-accent-500 text-white px-6 py-3 rounded-lg font-medium hover:opacity-90 transition-opacity w-full mt-4 block text-center min-h-[44px] flex items-center justify-center"
                 onClick={() => setIsOpen(false)}
               >
                 Submit Project

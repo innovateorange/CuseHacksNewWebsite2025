@@ -64,14 +64,14 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
             initial={{ scale: 0.9, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
-            className="bg-gradient-to-b from-[#1a1a2e] to-[#0a0a1a] rounded-xl p-6 w-full max-w-md border border-primary-500/30 shadow-[0_0_30px_rgba(86,11,173,0.3)]"
+            className="bg-gradient-to-b from-[#1a1a2e] to-[#0a0a1a] rounded-xl p-4 sm:p-6 w-full max-w-md mx-4 border border-primary-500/30 shadow-[0_0_30px_rgba(86,11,173,0.3)]"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-2">
                 <Mail className="text-primary-500" size={24} />
-                <h2 className="text-2xl font-bold text-white font-orbitron">Contact Us</h2>
+                <h2 className="text-xl sm:text-2xl font-bold text-white font-orbitron">Contact Us</h2>
               </div>
               <button
                 onClick={handleClose}

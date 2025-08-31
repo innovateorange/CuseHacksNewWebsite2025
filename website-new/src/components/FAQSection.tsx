@@ -64,28 +64,28 @@ const FAQSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-4xl font-bold text-center mb-10 font-orbitron"
+          className="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-10 font-orbitron"
         >
           Frequently Asked Questions
         </motion.h2>
 
         {/* Two Column Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-6xl mx-auto">
           {/* Left Column */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="space-y-6"
+            className="space-y-4 sm:space-y-6"
           >
             {leftColumnItems.map((item, index) => (
               <div key={`left-${index}`} className="space-y-2">
-                <h3 className="text-lg font-semibold text-primary-500 font-rajdhani flex items-start">
-                  <span className="text-accent-500 mr-3 mt-1 flex-shrink-0">•</span>
+                <h3 className="text-base sm:text-lg font-semibold text-primary-500 font-rajdhani flex items-start">
+                  <span className="text-accent-500 mr-2 sm:mr-3 mt-1 flex-shrink-0">•</span>
                   {item.question}
                 </h3>
-                <p className="text-white/80 text-sm leading-relaxed ml-6">
+                <p className="text-white/80 text-sm leading-relaxed ml-4 sm:ml-6">
                   {item.answer}
                 </p>
               </div>
@@ -98,15 +98,15 @@ const FAQSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="space-y-6"
+            className="space-y-4 sm:space-y-6"
           >
             {rightColumnItems.map((item, index) => (
               <div key={`right-${index}`} className="space-y-2">
-                <h3 className="text-lg font-semibold text-primary-500 font-rajdhani flex items-start">
-                  <span className="text-accent-500 mr-3 mt-1 flex-shrink-0">•</span>
+                <h3 className="text-base sm:text-lg font-semibold text-primary-500 font-rajdhani flex items-start">
+                  <span className="text-accent-500 mr-2 sm:mr-3 mt-1 flex-shrink-0">•</span>
                   {item.question}
                 </h3>
-                <p className="text-white/80 text-sm leading-relaxed ml-6">
+                <p className="text-white/80 text-sm leading-relaxed ml-4 sm:ml-6">
                   {item.answer}
                 </p>
               </div>

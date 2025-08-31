@@ -27,13 +27,13 @@ const ScheduleSection = () => {
       whileInView={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.6 }}
       viewport={{ once: true }}
-      className={`bg-gradient-to-b from-${color}/20 to-${color}/5 backdrop-blur-md rounded-xl p-6 border border-${color}/30 shadow-[0_0_15px_rgba(231,37,133,0.3)]`}
+      className={`bg-gradient-to-b from-${color}/20 to-${color}/5 backdrop-blur-md rounded-xl p-4 sm:p-6 border border-${color}/30 shadow-[0_0_15px_rgba(231,37,133,0.3)]`}
     >
-      <h3 className={`text-xl font-bold mb-6 font-rajdhani text-${color}`}>
+      <h3 className={`text-lg sm:text-xl font-bold mb-4 sm:mb-6 font-rajdhani text-${color}`}>
         {title}
       </h3>
 
-      <div className="space-y-6">
+      <div className="space-y-4 sm:space-y-6">
         {events.map((item, index) => (
           <motion.div 
             key={index}
@@ -43,13 +43,13 @@ const ScheduleSection = () => {
             viewport={{ once: true }}
             className="flex items-start"
           >
-            <div className="w-20 text-sm font-medium text-white/80 flex-shrink-0">
+            <div className="w-16 sm:w-20 text-xs sm:text-sm font-medium text-white/80 flex-shrink-0">
               {item.time}
             </div>
-            <div className={`w-4 h-4 rounded-full bg-${color} mx-3 mt-1 flex-shrink-0`} />
+            <div className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-${color} mx-2 sm:mx-3 mt-1 flex-shrink-0`} />
             <div className="flex-1">
-              <div className="font-medium text-white">{item.event}</div>
-              <div className="text-sm text-white/70 mt-1">{item.description}</div>
+              <div className="font-medium text-white text-sm sm:text-base">{item.event}</div>
+              <div className="text-xs sm:text-sm text-white/70 mt-1 leading-relaxed">{item.description}</div>
             </div>
           </motion.div>
         ))}
@@ -65,7 +65,7 @@ const ScheduleSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-4xl font-bold text-center mb-10 font-orbitron"
+          className="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-10 font-orbitron"
         >
           Schedule
         </motion.h2>

@@ -54,7 +54,7 @@ const CountdownSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-4xl font-bold text-center mb-10 font-orbitron bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-purple-500"
+          className="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-10 font-orbitron bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-purple-500"
         >
           Countdown to CuseHacks
         </motion.h2>
@@ -64,12 +64,12 @@ const CountdownSection = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="bg-gradient-to-b from-purple-500/20 to-purple-500/5 backdrop-blur-md rounded-xl p-8 border border-purple-500/30 shadow-[0_0_30px_rgba(86,11,173,0.3)] relative overflow-hidden"
+          className="bg-gradient-to-b from-purple-500/20 to-purple-500/5 backdrop-blur-md rounded-xl p-4 sm:p-6 md:p-8 border border-purple-500/30 shadow-[0_0_30px_rgba(86,11,173,0.3)] relative overflow-hidden"
         >
           <div className="absolute inset-0 bg-gradient-to-r from-primary-500/10 via-accent-500/10 to-purple-500/10 opacity-0 hover:opacity-100 transition-opacity duration-300" />
           
           {/* Countdown Display */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-6 sm:mb-8">
             {timeUnits.map((unit, index) => (
               <motion.div
                 key={unit.label}
@@ -77,25 +77,25 @@ const CountdownSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="text-center bg-[#0a0a1a]/50 rounded-lg p-4 border border-primary-500/20"
+                className="text-center bg-[#0a0a1a]/50 rounded-lg p-2 sm:p-3 md:p-4 border border-primary-500/20"
               >
-                <div className="text-3xl md:text-4xl font-bold font-orbitron text-primary-500 mb-2">
+                <div className="text-2xl sm:text-3xl md:text-4xl font-bold font-orbitron text-primary-500 mb-1 sm:mb-2">
                   {unit.value.toString().padStart(2, '0')}
                 </div>
-                <div className="text-white/80 text-sm md:text-base font-rajdhani">
+                <div className="text-white/80 text-xs sm:text-sm md:text-base font-rajdhani">
                   {unit.label}
                 </div>
               </motion.div>
             ))}
           </div>
 
-          <div className="text-center space-y-4">
-            <p className="text-white/90 text-lg mb-2">
+          <div className="text-center space-y-3 sm:space-y-4">
+            <p className="text-white/90 text-base sm:text-lg mb-2 px-2">
               Join us for 24 hours of innovation, creativity, and collaboration!
             </p>
-            <div className="flex items-center justify-center mt-4 text-white/80">
-              <MapPin className="w-5 h-5 text-primary-500 mr-2" />
-              <span>Life Science Atrium, Syracuse University</span>
+            <div className="flex items-center justify-center mt-3 sm:mt-4 text-white/80 text-sm sm:text-base px-2">
+              <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-primary-500 mr-2 flex-shrink-0" />
+              <span className="text-center">Life Science Atrium, Syracuse University</span>
             </div>
           </div>
         </motion.div>

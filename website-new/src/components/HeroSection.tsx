@@ -30,7 +30,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-6xl sm:text-7xl md:text-8xl font-extrabold tracking-wider font-orbitron relative mb-8"
+          className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-wider font-orbitron relative mb-6 sm:mb-8"
         >
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#ff1b6b] via-[#E72585] to-[#45caff] animate-gradient-x">
             CUSEHACKS
@@ -44,11 +44,11 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="space-y-6"
         >
-          <p className="text-2xl md:text-3xl text-white/90 font-medium mb-8">
+          <p className="text-xl sm:text-2xl md:text-3xl text-white/90 font-medium mb-6 sm:mb-8">
             October 4-5th 2025
           </p>
           
-          <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-8">
+          <p className="text-base sm:text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-6 sm:mb-8 px-4">
             Syracuse University's Premier Hackathon
           </p>
 
@@ -58,7 +58,7 @@ const HeroSection = () => {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="relative group bg-gradient-to-r from-[#4cc9f0] via-[#E72585] to-[#560BAD] text-white px-12 py-4 rounded-xl font-bold text-xl overflow-hidden transition-all duration-300 shadow-[0_0_30px_rgba(76,201,240,0.3)] cursor-pointer"
+                  className="relative group bg-gradient-to-r from-[#4cc9f0] via-[#E72585] to-[#560BAD] text-white px-8 sm:px-12 py-3 sm:py-4 rounded-xl font-bold text-lg sm:text-xl overflow-hidden transition-all duration-300 shadow-[0_0_30px_rgba(76,201,240,0.3)] cursor-pointer"
                 >
                   <span className="relative z-10">Register Now</span>
                   <div className="absolute inset-0 bg-gradient-to-r from-[#E72585] to-[#4cc9f0] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -71,7 +71,7 @@ const HeroSection = () => {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="relative group bg-gradient-to-r from-[#560BAD] via-[#E72585] to-[#ff1b6b] text-white px-12 py-4 rounded-xl font-bold text-xl overflow-hidden transition-all duration-300 shadow-[0_0_30px_rgba(255,27,107,0.3)] cursor-pointer"
+                  className="relative group bg-gradient-to-r from-[#560BAD] via-[#E72585] to-[#ff1b6b] text-white px-8 sm:px-12 py-3 sm:py-4 rounded-xl font-bold text-lg sm:text-xl overflow-hidden transition-all duration-300 shadow-[0_0_30px_rgba(255,27,107,0.3)] cursor-pointer"
                 >
                   <span className="relative z-10">Submit Project</span>
                   <div className="absolute inset-0 bg-gradient-to-r from-[#ff1b6b] to-[#560BAD] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
