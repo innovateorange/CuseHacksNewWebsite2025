@@ -8,6 +8,11 @@ export const featureFlags = {
   adminPanelEnabled: true
 }
 
+// Site configuration
+export const siteConfig = {
+  devpostLink: 'https://cusehacks2025.devpost.com'
+}
+
 export const mockTeamMembers = [
   {
     _id: '1',
@@ -155,6 +160,24 @@ const setStoredTeamMembers = (members: any[]) => {
   }
 }
 
+// Helper functions for site config persistence
+const getStoredSiteConfig = () => {
+  if (typeof window === 'undefined') return siteConfig
+  const stored = localStorage.getItem('siteConfig')
+  if (!stored) {
+    // Initialize localStorage with default config on first load
+    setStoredSiteConfig(siteConfig)
+    return siteConfig
+  }
+  return JSON.parse(stored)
+}
+
+const setStoredSiteConfig = (config: any) => {
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('siteConfig', JSON.stringify(config))
+  }
+}
+
 // Mock API functions
 const mockAPIImpl = {
   // Auth
@@ -279,6 +302,20 @@ const mockAPIImpl = {
     // Persist to localStorage
     localStorage.setItem('cusehacks_feature_flags', JSON.stringify(featureFlags))
     return { success: true, flags: featureFlags }
+  },
+
+  // Site Configuration
+  getSiteConfig: async () => {
+    await new Promise(resolve => setTimeout(resolve, 200))
+    return getStoredSiteConfig()
+  },
+
+  updateSiteConfig: async (updates: Partial<typeof siteConfig>) => {
+    await new Promise(resolve => setTimeout(resolve, 300))
+    const currentConfig = getStoredSiteConfig()
+    const updatedConfig = { ...currentConfig, ...updates }
+    setStoredSiteConfig(updatedConfig)
+    return { success: true, config: updatedConfig }
   },
 
   // Contact Messages

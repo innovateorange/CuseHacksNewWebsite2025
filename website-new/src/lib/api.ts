@@ -139,6 +139,19 @@ export const realAPI = {
     })
   },
 
+  // Site Configuration (placeholder for future implementation)
+  getSiteConfig: async () => {
+    await new Promise(resolve => setTimeout(resolve, 200))
+    // Placeholder - return default config for now
+    return { devpostLink: 'https://cusehacks2025.devpost.com' }
+  },
+
+  updateSiteConfig: async (updates: any) => {
+    await new Promise(resolve => setTimeout(resolve, 300))
+    // Placeholder - just return success for now
+    return { success: true, config: { devpostLink: 'https://cusehacks2025.devpost.com', ...updates } }
+  },
+
   // Projects (placeholder for future implementation)
   getProjects: async (_category?: string) => {
     await new Promise(resolve => setTimeout(resolve, 300))

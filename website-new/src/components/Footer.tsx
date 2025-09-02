@@ -4,7 +4,7 @@ import { Instagram, Mail } from 'lucide-react'
 const Footer = () => {
   const socialLinks = [
     { icon: Instagram, href: "https://www.instagram.com/cusehacks/", label: "Instagram" },
-    { icon: Mail, href: "mailto:info@cusehacks.org", label: "Email" },
+    { icon: Mail, href: "mailto:innovateorange@gmail.com", label: "Email" },
     { 
       icon: ({ size, ...props }: { size?: number }) => (
         <svg width={size || 18} height={size || 18} viewBox="0 0 24 24" fill="currentColor" {...props}>
@@ -103,10 +103,10 @@ const Footer = () => {
             <ul className="space-y-2">
               <li>
                 <a 
-                  href="mailto:info@cusehacks.org" 
+                  href="mailto:innovateorange@gmail.com" 
                   className="text-white/80 hover:text-primary-400 transition-colors"
                 >
-                  info@cusehacks.org
+                  innovateorange@gmail.com
                 </a>
               </li>
               <li className="text-white/80">Syracuse University</li>

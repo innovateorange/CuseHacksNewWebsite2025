@@ -1,14 +1,29 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
 import { useFeatureFlags } from '../contexts/FeatureFlagContext'
+import { mockAPI } from '../lib/mockData'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const [devpostLink, setDevpostLink] = useState('')
   const location = useLocation()
   const isHomePage = location.pathname === '/'
   const { flags, loading } = useFeatureFlags()
+
+  useEffect(() => {
+    const loadDevpostLink = async () => {
+      try {
+        const config = await mockAPI.getSiteConfig()
+        setDevpostLink(config.devpostLink)
+      } catch (error) {
+        console.error('Error loading DevPost link:', error)
+      }
+    }
+
+    loadDevpostLink()
+  }, [])
 
   const navItems = [
     { name: 'Home', href: '#home', type: 'scroll' },
@@ -23,6 +38,15 @@ const Navbar = () => {
       document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' })
     } else {
       window.location.href = '/' + id
+    }
+    setIsOpen(false)
+  }
+
+  const handleSubmitProject = () => {
+    if (devpostLink) {
+      window.open(devpostLink, '_blank', 'noopener,noreferrer')
+    } else {
+      alert('DevPost link not configured. Please contact the organizers.')
     }
     setIsOpen(false)
   }
@@ -70,12 +94,12 @@ const Navbar = () => {
                 </Link>
               )}
               {!loading && flags.projectSubmissionsEnabled && (
-                <Link
-                  to="/submit"
+                <button
+                  onClick={handleSubmitProject}
                   className="bg-gradient-to-r from-primary-500 to-accent-500 text-white px-6 py-2 rounded-lg font-medium hover:opacity-90 transition-opacity"
                 >
                   Submit Project
-                </Link>
+                </button>
               )}
             </div>
           </div>
@@ -130,13 +154,12 @@ const Navbar = () => {
               </Link>
             )}
             {!loading && flags.projectSubmissionsEnabled && (
-              <Link
-                to="/submit"
+              <button
+                onClick={handleSubmitProject}
                 className="bg-gradient-to-r from-primary-500 to-accent-500 text-white px-6 py-3 rounded-lg font-medium hover:opacity-90 transition-opacity w-full mt-4 block text-center min-h-[44px] flex items-center justify-center"
-                onClick={() => setIsOpen(false)}
               >
                 Submit Project
-              </Link>
+              </button>
             )}
           </div>
         </motion.div>

@@ -1,13 +1,37 @@
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useFeatureFlags } from '../contexts/FeatureFlagContext'
+import { mockAPI } from '../lib/mockData'
 
 const HeroSection = () => {
   const { flags, loading } = useFeatureFlags()
+  const [devpostLink, setDevpostLink] = useState('')
+
+  useEffect(() => {
+    const loadDevpostLink = async () => {
+      try {
+        const config = await mockAPI.getSiteConfig()
+        setDevpostLink(config.devpostLink)
+      } catch (error) {
+        console.error('Error loading DevPost link:', error)
+      }
+    }
+
+    loadDevpostLink()
+  }, [])
   
   const scrollToCountdown = () => {
     document.querySelector('#countdown')?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  const handleSubmitProject = () => {
+    if (devpostLink) {
+      window.open(devpostLink, '_blank', 'noopener,noreferrer')
+    } else {
+      alert('DevPost link not configured. Please contact the organizers.')
+    }
   }
 
   return (
@@ -67,16 +91,15 @@ const HeroSection = () => {
             )}
             
             {!loading && flags.projectSubmissionsEnabled && (
-              <Link to="/submit">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="relative group bg-gradient-to-r from-[#560BAD] via-[#E72585] to-[#ff1b6b] text-white px-8 sm:px-12 py-3 sm:py-4 rounded-xl font-bold text-lg sm:text-xl overflow-hidden transition-all duration-300 shadow-[0_0_30px_rgba(255,27,107,0.3)] cursor-pointer"
-                >
-                  <span className="relative z-10">Submit Project</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#ff1b6b] to-[#560BAD] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </motion.button>
-              </Link>
+              <motion.button
+                onClick={handleSubmitProject}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="relative group bg-gradient-to-r from-[#560BAD] via-[#E72585] to-[#ff1b6b] text-white px-8 sm:px-12 py-3 sm:py-4 rounded-xl font-bold text-lg sm:text-xl overflow-hidden transition-all duration-300 shadow-[0_0_30px_rgba(255,27,107,0.3)] cursor-pointer"
+              >
+                <span className="relative z-10">Submit Project</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-[#ff1b6b] to-[#560BAD] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </motion.button>
             )}
           </div>
         </motion.div>

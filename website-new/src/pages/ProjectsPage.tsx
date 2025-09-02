@@ -24,6 +24,7 @@ function ProjectsPage() {
   const [loading, setLoading] = useState(true)
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
   const [votingProject, setVotingProject] = useState<string | null>(null)
+  const [devpostLink, setDevpostLink] = useState('')
 
   const categories = [
     'all',
@@ -37,6 +38,19 @@ function ProjectsPage() {
   useEffect(() => {
     fetchProjects()
   }, [selectedCategory])
+
+  useEffect(() => {
+    const loadDevpostLink = async () => {
+      try {
+        const config = await mockAPI.getSiteConfig()
+        setDevpostLink(config.devpostLink)
+      } catch (error) {
+        console.error('Error loading DevPost link:', error)
+      }
+    }
+
+    loadDevpostLink()
+  }, [])
 
   const fetchProjects = async () => {
     setLoading(true)
@@ -68,6 +82,14 @@ function ProjectsPage() {
     }
   }
 
+  const handleSubmitProject = () => {
+    if (devpostLink) {
+      window.open(devpostLink, '_blank', 'noopener,noreferrer')
+    } else {
+      alert('DevPost link not configured. Please contact the organizers.')
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#1a1a2e] to-[#0a0a1a] text-white">
       <div className="relative">
@@ -90,12 +112,12 @@ function ProjectsPage() {
               </p>
               
               <div className="flex flex-wrap justify-center gap-4">
-                <Link
-                  to="/submit"
+                <button
+                  onClick={handleSubmitProject}
                   className="bg-gradient-to-r from-primary-500 to-accent-500 text-white px-6 py-3 rounded-lg font-medium hover:opacity-90 transition-opacity"
                 >
                   Submit Your Project
-                </Link>
+                </button>
                 <Link
                   to="/"
                   className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
@@ -151,12 +173,12 @@ function ProjectsPage() {
                     ? 'No projects have been submitted yet. Be the first!'
                     : `No projects in the "${selectedCategory}" category yet.`}
                 </p>
-                <Link
-                  to="/submit"
+                <button
+                  onClick={handleSubmitProject}
                   className="inline-block bg-gradient-to-r from-primary-500 to-accent-500 text-white px-6 py-3 rounded-lg font-medium hover:opacity-90 transition-opacity"
                 >
                   Submit Your Project
-                </Link>
+                </button>
               </motion.div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

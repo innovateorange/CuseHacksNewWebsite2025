@@ -40,6 +40,8 @@ function AdminPage() {
   })
   const [editingMember, setEditingMember] = useState<TeamMember | null>(null)
   const [showEditForm, setShowEditForm] = useState(false)
+  const [siteConfig, setSiteConfig] = useState({ devpostLink: '' })
+  const [configLoading, setConfigLoading] = useState(false)
 
   // Authentication
   const handleLogin = async (e: React.FormEvent) => {
@@ -86,8 +88,41 @@ function AdminPage() {
   useEffect(() => {
     if (isAuthenticated) {
       fetchTeamMembers()
+      loadSiteConfig()
     }
   }, [isAuthenticated])
+
+  // Load site config
+  const loadSiteConfig = async () => {
+    try {
+      const config = await mockAPI.getSiteConfig()
+      setSiteConfig(config)
+    } catch (error) {
+      console.error('Error loading site config:', error)
+    }
+  }
+
+  // Update DevPost link
+  const handleUpdateDevPostLink = async (newLink: string) => {
+    if (!newLink.trim()) {
+      alert('Please enter a valid DevPost link')
+      return
+    }
+
+    setConfigLoading(true)
+    try {
+      const result = await mockAPI.updateSiteConfig({ devpostLink: newLink.trim() })
+      if (result.success) {
+        setSiteConfig(result.config)
+        alert('DevPost link updated successfully!')
+      }
+    } catch (error) {
+      console.error('Error updating DevPost link:', error)
+      alert('Failed to update DevPost link')
+    } finally {
+      setConfigLoading(false)
+    }
+  }
 
   // Delete team member
   const handleDelete = async (id: string) => {
@@ -325,6 +360,48 @@ function AdminPage() {
                     }`}
                   />
                 </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Site Configuration */}
+          <div className="bg-gradient-to-b from-cyan-500/20 to-cyan-500/5 backdrop-blur-md rounded-xl p-6 border border-cyan-500/30 mb-8">
+            <h3 className="text-lg font-bold text-cyan-400 mb-4">Site Configuration</h3>
+            <div className="space-y-4">
+              <div>
+                <div className="mb-3">
+                  <h4 className="text-white font-medium mb-2">DevPost Link</h4>
+                  <p className="text-white/70 text-sm mb-3">Set the DevPost link where users will submit their projects</p>
+                </div>
+                <div className="flex gap-3">
+                  <input
+                    type="url"
+                    value={siteConfig.devpostLink}
+                    onChange={(e) => setSiteConfig(prev => ({ ...prev, devpostLink: e.target.value }))}
+                    placeholder="https://yourcontest.devpost.com"
+                    className="flex-1 px-4 py-2 bg-[#0a0a1a]/50 border border-cyan-500/30 rounded-lg focus:border-cyan-500 focus:outline-none text-white"
+                  />
+                  <button
+                    onClick={() => handleUpdateDevPostLink(siteConfig.devpostLink)}
+                    disabled={configLoading}
+                    className="bg-gradient-to-r from-cyan-500 to-cyan-600 text-white px-6 py-2 rounded-lg font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
+                  >
+                    {configLoading ? 'Saving...' : 'Save'}
+                  </button>
+                </div>
+                {siteConfig.devpostLink && (
+                  <div className="mt-2 flex items-center gap-2">
+                    <span className="text-white/70 text-sm">Current link:</span>
+                    <a 
+                      href={siteConfig.devpostLink} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-cyan-400 text-sm hover:text-cyan-300 underline"
+                    >
+                      {siteConfig.devpostLink}
+                    </a>
+                  </div>
+                )}
               </div>
             </div>
           </div>
