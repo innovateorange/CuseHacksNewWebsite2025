@@ -20,7 +20,8 @@ export const mockTeamMembers = [
     role: 'President',
     image: '/images/team/Jason.jpg',
     bio: 'Some of my hobbies are music production and hiking.',
-    year: 2025,
+    startYear: 2025,
+    endYear: null,  // null indicates ongoing service
     isActive: true,
     order: 1,
     links: { linkedin: '' }
@@ -31,7 +32,8 @@ export const mockTeamMembers = [
     role: 'Vice President',
     image: '/images/team/Alan.jpg',
     bio: 'Hobbies: Playing video games, cooking, gardening, and I\'m also interested in aquascaping!',
-    year: 2025,
+    startYear: 2025,
+    endYear: null,  // null indicates ongoing service
     isActive: true,
     order: 2,
     links: { linkedin: '' }
@@ -42,7 +44,8 @@ export const mockTeamMembers = [
     role: 'Web Dev Chair', 
     image: '/images/team/Kamaljit.jpg',
     bio: 'Fueled by chai and fluent in at least five languages (some human, some code).',
-    year: 2025,
+    startYear: 2025,
+    endYear: null,  // null indicates ongoing service
     isActive: true,
     order: 3,
     links: { linkedin: '' }
@@ -53,7 +56,8 @@ export const mockTeamMembers = [
     role: 'Secretary',
     image: '/images/team/Dani.jpg', 
     bio: 'CS major from Harvard, MA. Lover of big dogs.',
-    year: 2025,
+    startYear: 2025,
+    endYear: null,  // null indicates ongoing service
     isActive: true,
     order: 4,
     links: { linkedin: '' }
@@ -64,7 +68,8 @@ export const mockTeamMembers = [
     role: 'Sponsorship',
     image: '/images/team/Hunter.jpg',
     bio: 'Some of my hobbies are basketball and mountain biking!',
-    year: 2025,
+    startYear: 2025,
+    endYear: null,  // null indicates ongoing service
     isActive: true,
     order: 7,
     links: { linkedin: '' }
@@ -75,9 +80,47 @@ export const mockTeamMembers = [
     role: 'Design Chair',
     image: '/images/team/Alex.jpg',
     bio: 'I like creating stuff, playing video games, and watching cat videos!',
-    year: 2025,
+    startYear: 2025,
+    endYear: null,  // null indicates ongoing service
     isActive: true,
     order: 8,
+    links: { linkedin: '' }
+  },
+  // Historical team members with flexible date ranges
+  {
+    _id: '7',
+    name: 'Former President',
+    role: 'President',
+    image: '/images/team/placeholder.jpg',
+    bio: 'Led the team during the 2024-2025 academic year.',
+    startYear: 2024,
+    endYear: 2025,
+    isActive: true,
+    order: 1,
+    links: { linkedin: '' }
+  },
+  {
+    _id: '8',
+    name: 'Long-term Member',
+    role: 'Vice President', 
+    image: '/images/team/placeholder.jpg',
+    bio: 'Served multiple terms from 2022 to 2024.',
+    startYear: 2022,
+    endYear: 2024,
+    isActive: true,
+    order: 2,
+    links: { linkedin: '' }
+  },
+  {
+    _id: '9',
+    name: 'Legacy Member',
+    role: 'Secretary',
+    image: '/images/team/placeholder.jpg',
+    bio: 'A founding member who served from the early days.',
+    startYear: 1990,
+    endYear: 2005,
+    isActive: true,
+    order: 3,
     links: { linkedin: '' }
   }
 ]
