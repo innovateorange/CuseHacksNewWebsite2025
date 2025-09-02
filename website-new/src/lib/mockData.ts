@@ -137,6 +137,24 @@ const USE_MOCK_API = import.meta.env.VITE_USE_MOCK_API !== 'false'
 
 console.log('API Mode:', USE_MOCK_API ? 'Mock' : 'Real')
 
+// Helper functions for localStorage persistence
+const getStoredTeamMembers = () => {
+  if (typeof window === 'undefined') return mockTeamMembers
+  const stored = localStorage.getItem('teamMembers')
+  if (!stored) {
+    // Initialize localStorage with default team members on first load
+    setStoredTeamMembers(mockTeamMembers)
+    return mockTeamMembers
+  }
+  return JSON.parse(stored)
+}
+
+const setStoredTeamMembers = (members: any[]) => {
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('teamMembers', JSON.stringify(members))
+  }
+}
+
 // Mock API functions
 const mockAPIImpl = {
   // Auth
@@ -151,23 +169,40 @@ const mockAPIImpl = {
   // Team
   getTeam: async () => {
     await new Promise(resolve => setTimeout(resolve, 300))
-    return mockTeamMembers
+    return getStoredTeamMembers()
   },
 
   deleteTeamMember: async (_id: string) => {
     await new Promise(resolve => setTimeout(resolve, 300))
+    const currentMembers = getStoredTeamMembers()
+    const updatedMembers = currentMembers.filter((member: any) => member._id !== _id)
+    setStoredTeamMembers(updatedMembers)
     return { success: true }
   },
 
-  updateTeamMember: async (member: any) => {
+  updateTeamMember: async (updatedMember: any) => {
     await new Promise(resolve => setTimeout(resolve, 300))
-    return member
+    const currentMembers = getStoredTeamMembers()
+    const updatedMembers = currentMembers.map((member: any) => 
+      member._id === updatedMember._id ? updatedMember : member
+    )
+    setStoredTeamMembers(updatedMembers)
+    return updatedMember
   },
 
   addTeamMember: async (member: any) => {
     await new Promise(resolve => setTimeout(resolve, 300))
-    mockTeamMembers.push(member)
+    const currentMembers = getStoredTeamMembers()
+    const newMembers = [...currentMembers, member]
+    setStoredTeamMembers(newMembers)
     return { success: true, member }
+  },
+
+  // Development helper: reset team members to default
+  resetTeamMembers: async () => {
+    await new Promise(resolve => setTimeout(resolve, 300))
+    setStoredTeamMembers(mockTeamMembers)
+    return { success: true }
   },
 
   // Projects  
