@@ -19,10 +19,6 @@ const teamMemberSchema = new mongoose.Schema({
     type: String,
     trim: true
   },
-  year: {
-    type: Number,
-    required: true
-  },
   isActive: {
     type: Boolean,
     default: true

@@ -10,8 +10,6 @@ interface TeamMember {
   role: string
   image: string
   bio?: string
-  startYear: number
-  endYear: number | null  // null or 0 indicates ongoing service
   isActive: boolean
   order: number
   links?: {
@@ -35,8 +33,6 @@ function AdminPage() {
     role: '',
     image: '',
     bio: '',
-    startYear: new Date().getFullYear(),
-    endYear: null as number | null,  // null indicates ongoing service
     order: 1,
     links: { github: '', linkedin: '', email: '', website: '' }
   })
@@ -168,8 +164,6 @@ function AdminPage() {
         role: '',
         image: '',
         bio: '',
-        startYear: new Date().getFullYear(),
-        endYear: null,  // null indicates ongoing service
         order: Math.max(...teamMembers.map(m => m.order), 0) + 1,
         links: { github: '', linkedin: '', email: '', website: '' }
       })
@@ -475,38 +469,6 @@ function AdminPage() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-2">Start Year</label>
-                <input
-                  type="number"
-                  value={newMember.startYear}
-                  onChange={(e) => setNewMember(prev => ({ ...prev, startYear: parseInt(e.target.value) }))}
-                  className="w-full px-4 py-2 bg-[#0a0a1a]/50 border border-primary-500/30 rounded-lg focus:border-primary-500 focus:outline-none text-white"
-                  min="1900"
-                  max="2100"
-                  required
-                />
-                <p className="text-white/60 text-xs mt-1">Year when this person started serving</p>
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-2">End Year</label>
-                <input
-                  type="number"
-                  value={newMember.endYear || ''}
-                  onChange={(e) => {
-                    const value = e.target.value
-                    setNewMember(prev => ({ 
-                      ...prev, 
-                      endYear: value === '' || value === '0' ? null : parseInt(value) 
-                    }))
-                  }}
-                  className="w-full px-4 py-2 bg-[#0a0a1a]/50 border border-primary-500/30 rounded-lg focus:border-primary-500 focus:outline-none text-white"
-                  min="0"
-                  max="2100"
-                  placeholder="Leave empty or enter 0 for ongoing service"
-                />
-                <p className="text-white/60 text-xs mt-1">Year when this person finished serving (leave empty or use 0 for current members)</p>
-              </div>
-              <div>
                 <label className="block text-sm font-medium mb-2">Order</label>
                 <input
                   type="number"
@@ -591,38 +553,6 @@ function AdminPage() {
                   currentImage={editingMember.image}
                   className="w-full"
                 />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-2">Start Year</label>
-                <input
-                  type="number"
-                  value={editingMember.startYear}
-                  onChange={(e) => setEditingMember(prev => prev ? ({ ...prev, startYear: parseInt(e.target.value) }) : null)}
-                  className="w-full px-4 py-2 bg-[#0a0a1a]/50 border border-primary-500/30 rounded-lg focus:border-primary-500 focus:outline-none text-white"
-                  min="1900"
-                  max="2100"
-                  required
-                />
-                <p className="text-white/60 text-xs mt-1">Year when this person started serving</p>
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-2">End Year</label>
-                <input
-                  type="number"
-                  value={editingMember.endYear || ''}
-                  onChange={(e) => {
-                    const value = e.target.value
-                    setEditingMember(prev => prev ? ({ 
-                      ...prev, 
-                      endYear: value === '' || value === '0' ? null : parseInt(value) 
-                    }) : null)
-                  }}
-                  className="w-full px-4 py-2 bg-[#0a0a1a]/50 border border-primary-500/30 rounded-lg focus:border-primary-500 focus:outline-none text-white"
-                  min="0"
-                  max="2100"
-                  placeholder="Leave empty or enter 0 for ongoing service"
-                />
-                <p className="text-white/60 text-xs mt-1">Year when this person finished serving (leave empty or use 0 for current members)</p>
               </div>
               <div>
                 <label className="block text-sm font-medium mb-2">Order</label>
@@ -712,7 +642,7 @@ function AdminPage() {
                   {member.role}
                 </p>
                 <p className="text-white/70 text-xs mb-4">
-                  Served: {member.startYear} - {member.endYear || 'Present'} | Order: {member.order}
+                  Order: {member.order} | Status: {member.isActive ? 'Active' : 'Inactive'}
                 </p>
                 
                 <div className="flex gap-2 flex-wrap">
