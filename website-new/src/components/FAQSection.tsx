@@ -28,7 +28,7 @@ const FAQSection = () => {
     },
     {
       question: "Where and when are the workshops?",
-      answer: "Our workshops are every Wednesday in Link Hall Room 160 at 7:00 pm. Come join us!",
+      answer: "Our workshops are every Wednesday in Link Hall Room 160 at 6:30 PM. Come join us!",
     },
     {
       question: "Can I volunteer for CuseHacks 2025?",

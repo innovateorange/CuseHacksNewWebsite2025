@@ -51,7 +51,7 @@ const AboutSection = () => {
               </div>
               <div className="bg-[#0a0a1a]/50 rounded-lg p-3 sm:p-4 border border-primary-500/20">
                 <h4 className="text-base sm:text-lg font-semibold text-primary-500 mb-2">Weekly Workshops</h4>
-                <p className="text-sm leading-relaxed">Every Wednesday in Link Hall Room 160 at 7:00 PM. Topics include Leetcode, Machine Learning, and more!</p>
+                <p className="text-sm leading-relaxed">Every Wednesday in Link Hall Room 160 at 6:30 PM. Topics include Leetcode, Machine Learning, and more!</p>
               </div>
             </div>
 
