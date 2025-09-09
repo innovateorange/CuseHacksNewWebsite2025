@@ -44,8 +44,8 @@ const HeroSection = () => {
         <img
           src="/images/SyracuseSkyline2.jpg"
           alt="Syracuse Skyline"
-          className="w-full object-cover object-top"
-          style={{ height: '150%', transform: 'translateY(-14%)' }}
+          className="w-full h-full object-cover"
+          style={{ objectPosition: '50% 13%' }}
         />
       </div>
 
