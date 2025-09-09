@@ -18,7 +18,7 @@ const CountdownSection = () => {
   })
 
   useEffect(() => {
-    const targetDate = new Date("2025-10-04T09:00:00")
+    const targetDate = new Date("2025-10-25T09:00:00")
 
     const timer = setInterval(() => {
       const now = new Date().getTime()

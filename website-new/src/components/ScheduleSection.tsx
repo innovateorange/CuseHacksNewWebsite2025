@@ -73,12 +73,12 @@ const ScheduleSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <EventCard 
             events={day1Events}
-            title="Day 1: Saturday, Oct 4"
+            title="Day 1: Saturday, Oct 25"
             color="accent-500"
           />
           <EventCard 
             events={day2Events}
-            title="Day 2: Sunday, Oct 5"
+            title="Day 2: Sunday, Oct 26"
             color="primary-500"
           />
         </div>

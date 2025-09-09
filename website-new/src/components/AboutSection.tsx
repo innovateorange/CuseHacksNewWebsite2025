@@ -24,7 +24,7 @@ const AboutSection = () => {
           <div className="space-y-6 text-white/90 leading-relaxed">
             <div>
               <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 font-rajdhani text-accent-500">
-                Who is Innovate Orange?
+                What is Innovate Orange?
               </h3>
               <p className="mb-4">
                 Innovate Orange is the first and only student-run hackathon organization at Syracuse University. 
@@ -51,7 +51,7 @@ const AboutSection = () => {
               </div>
               <div className="bg-[#0a0a1a]/50 rounded-lg p-3 sm:p-4 border border-primary-500/20">
                 <h4 className="text-base sm:text-lg font-semibold text-primary-500 mb-2">Weekly Workshops</h4>
-                <p className="text-sm leading-relaxed">Every Wednesday in Link Hall Room 160 at 7:00 PM. Topics include Leetcode, Machine Learning, and more!</p>
+                <p className="text-sm leading-relaxed">Every Wednesday in Link Hall Room 160 at 6:30 PM. Topics include Leetcode, Machine Learning, and more!</p>
               </div>
             </div>
 

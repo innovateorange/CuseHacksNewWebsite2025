@@ -69,7 +69,7 @@ const HeroSection = () => {
           className="space-y-6"
         >
           <p className="text-xl sm:text-2xl md:text-3xl text-white/90 font-medium mb-6 sm:mb-8">
-            October 4-5th 2025
+            October 25-26th 2025
           </p>
           
           <p className="text-base sm:text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-6 sm:mb-8 px-4">

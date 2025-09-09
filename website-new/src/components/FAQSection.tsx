@@ -20,7 +20,7 @@ const FAQSection = () => {
     },
     {
       question: "Where is CuseHacks going to be?",
-      answer: "CuseHacks is being held in the Life Science Atrium from Saturday-Sunday on October 4-5th.",
+      answer: "CuseHacks is being held in the Life Science Atrium from Saturday-Sunday on October 25th-26th.",
     },
     {
       question: "What do I need to bring?",
@@ -28,7 +28,7 @@ const FAQSection = () => {
     },
     {
       question: "Where and when are the workshops?",
-      answer: "Our workshops are every Wednesday in Link Hall Room 160 at 7:00 pm. Come join us!",
+      answer: "Our workshops are every Wednesday in Link Hall Room 160 at 6:30 pm. Come join us!",
     },
     {
       question: "Can I volunteer for CuseHacks 2025?",
