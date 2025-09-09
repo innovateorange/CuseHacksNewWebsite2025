@@ -37,16 +37,16 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen pt-16 pb-16 px-4 flex flex-col items-center justify-center text-center"
+      className="relative min-h-screen pt-16 pb-16 px-4 flex flex-col items-center justify-center text-center overflow-hidden"
     >
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/images/cyberpunk-city.webp"
-          alt="Cyberpunk City"
-          className="w-full h-full object-cover"
+          src="/images/SyracuseSkyline2.jpg"
+          alt="Syracuse Skyline"
+          className="w-full object-cover object-top"
+          style={{ height: '150%', transform: 'translateY(-14%)' }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a1a]/90 via-[#0a0a1a]/80 to-[#0a0a1a]/90" />
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto">
