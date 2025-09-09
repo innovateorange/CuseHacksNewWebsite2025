@@ -42,10 +42,9 @@ const HeroSection = () => {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/images/SyracuseSkyline2.jpg"
+          src="/images/SyracuseSkyline2.png"
           alt="Syracuse Skyline"
           className="w-full h-full object-cover"
-          style={{ objectPosition: '50% 13%' }}
         />
       </div>
 
@@ -106,20 +105,40 @@ const HeroSection = () => {
       </div>
 
       {/* Scroll down indicator */}
-      <div className="absolute bottom-8 left-0 right-0 flex justify-center">
-        <motion.button
+      <motion.div 
+        className="absolute bottom-8 left-0 right-0 flex justify-center"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+      >
+        <div 
+          className="relative cursor-pointer"
           onClick={scrollToCountdown}
-          className="text-white hover:bg-white/10 flex flex-col items-center justify-center gap-2 rounded-full px-8 py-4 border border-primary-500/30 hover:border-primary-500 transition-all duration-300 group backdrop-blur-sm"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          style={{ 
+            filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3))'
+          }}
         >
-          <span className="text-primary-500 group-hover:text-white transition-colors text-lg font-medium">
-            Learn More
-          </span>
-          <ChevronDown className="h-6 w-6 text-primary-500 group-hover:text-white transition-colors animate-bounce" />
-        </motion.button>
-      </div>
+          <motion.svg
+            className="w-8 h-8 text-white/80"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            style={{ 
+              filter: 'drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4))'
+            }}
+            animate={{
+              y: [0, 10, 0]
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: 'easeInOut'
+            }}
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </motion.svg>
+        </div>
+      </motion.div>
     </section>
   )
 }
