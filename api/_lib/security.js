@@ -36,6 +36,7 @@ export const rateLimit = (windowMs = 15 * 60 * 1000, max = 100) => {
 export const generalLimiter = rateLimit(15 * 60 * 1000, 100) // 100 requests per 15 minutes
 export const authLimiter = rateLimit(15 * 60 * 1000, 5) // 5 attempts per 15 minutes
 export const contactLimiter = rateLimit(60 * 60 * 1000, 10) // 10 submissions per hour
+export const uploadLimiter = rateLimit(60 * 60 * 1000, 5) // 5 uploads per hour
 
 // XSS sanitization function
 const xssOptions = {
@@ -114,4 +115,43 @@ export const setSecurityHeaders = (res) => {
   res.setHeader('X-XSS-Protection', '1; mode=block')
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin')
   res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.cusehacks.org")
+}
+
+// File validation function
+export const validateFileUpload = (file) => {
+  const MAX_SIZE = 5 * 1024 * 1024 // 5MB
+  const ALLOWED_TYPES = ['application/pdf']
+
+  if (!file) {
+    return { valid: false, error: 'No file provided' }
+  }
+
+  if (file.size > MAX_SIZE) {
+    return { valid: false, error: 'File size must be less than 5MB' }
+  }
+
+  if (!ALLOWED_TYPES.includes(file.type)) {
+    return { valid: false, error: 'Only PDF files are allowed' }
+  }
+
+  return { valid: true }
+}
+
+// Apply rate limit as async function for Vercel
+export const applyRateLimit = async (req, res) => {
+  return new Promise((resolve, reject) => {
+    uploadLimiter(req, res, (result) => {
+      if (result) {
+        reject(new Error('Rate limit exceeded'))
+      } else {
+        resolve()
+      }
+    })
+  })
+}
+
+// Auth requirement placeholder
+export const requireAuth = (req, res, next) => {
+  // For now, skip auth - add proper auth later if needed
+  if (next) next()
 }

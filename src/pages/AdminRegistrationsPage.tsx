@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { Download } from 'lucide-react'
+import { Download, FileText, ExternalLink } from 'lucide-react'
 import { realAPI as mockAPI } from '../lib/api'
 
 interface Registration {
@@ -12,6 +12,10 @@ interface Registration {
   registrationDate: string
   status: 'pending' | 'confirmed' | 'waitlisted'
   createdAt: string
+  resumeUrl?: string
+  resumeFileName?: string
+  resumeUploadDate?: string
+  hasResume?: boolean
 }
 
 interface RegistrationStats {
@@ -120,7 +124,7 @@ function AdminRegistrationsPage() {
     }
 
     // CSV headers
-    const headers = ['Name', 'Email', 'School', 'Status', 'Registration Date']
+    const headers = ['Name', 'Email', 'School', 'Status', 'Registration Date', 'Has Resume', 'Resume Filename', 'Resume URL']
 
     // Convert registrations to CSV format
     const csvContent = [
@@ -130,7 +134,10 @@ function AdminRegistrationsPage() {
         `"${registration.email}"`,
         `"${registration.school.replace(/"/g, '""')}"`, // Escape quotes in school names
         registration.status,
-        new Date(registration.registrationDate).toLocaleDateString()
+        new Date(registration.registrationDate).toLocaleDateString(),
+        registration.hasResume ? 'Yes' : 'No',
+        registration.resumeFileName ? `"${registration.resumeFileName.replace(/"/g, '""')}"` : '',
+        registration.resumeUrl ? `"${registration.resumeUrl}"` : ''
       ].join(','))
     ].join('\n')
 
@@ -225,6 +232,7 @@ function AdminRegistrationsPage() {
                     <th className="text-left px-6 py-4 font-semibold text-white">Email</th>
                     <th className="text-left px-6 py-4 font-semibold text-white">School</th>
                     <th className="text-left px-6 py-4 font-semibold text-white">Status</th>
+                    <th className="text-left px-6 py-4 font-semibold text-white">Resume</th>
                     <th className="text-left px-6 py-4 font-semibold text-white">Registered</th>
                     <th className="text-left px-6 py-4 font-semibold text-white">Actions</th>
                   </tr>
@@ -255,6 +263,22 @@ function AdminRegistrationsPage() {
                         }`}>
                           {registration.status}
                         </span>
+                      </td>
+                      <td className="px-6 py-4">
+                        {registration.hasResume && registration.resumeUrl ? (
+                          <a
+                            href={registration.resumeUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 text-primary-400 hover:text-primary-300 transition-colors"
+                            title={registration.resumeFileName || 'Download Resume'}
+                          >
+                            <FileText size={16} />
+                            <ExternalLink size={12} />
+                          </a>
+                        ) : (
+                          <span className="text-white/40 text-sm">No resume</span>
+                        )}
                       </td>
                       <td className="px-6 py-4 text-white/60 text-sm">
                         {new Date(registration.registrationDate).toLocaleDateString()}

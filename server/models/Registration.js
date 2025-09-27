@@ -22,6 +22,26 @@ const registrationSchema = new mongoose.Schema({
     type: String,
     enum: ['pending', 'confirmed', 'waitlisted'],
     default: 'pending'
+  },
+  resumeUrl: {
+    type: String,
+    required: false
+  },
+  resumeFileName: {
+    type: String,
+    required: false
+  },
+  resumeFileSize: {
+    type: Number,
+    required: false
+  },
+  resumeUploadDate: {
+    type: Date,
+    required: false
+  },
+  hasResume: {
+    type: Boolean,
+    default: false
   }
 }, {
   timestamps: true

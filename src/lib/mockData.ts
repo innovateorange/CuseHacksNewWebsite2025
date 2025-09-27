@@ -151,7 +151,11 @@ export const mockRegistrations = [
     school: 'Syracuse University',
     registrationDate: '2025-01-10T14:30:00Z',
     status: 'confirmed' as 'pending' | 'confirmed' | 'waitlisted',
-    createdAt: '2025-01-10T14:30:00Z'
+    createdAt: '2025-01-10T14:30:00Z',
+    resumeUrl: 'https://example.com/resume.pdf',
+    resumeFileName: 'john_doe_resume.pdf',
+    resumeUploadDate: '2025-01-10T14:35:00Z',
+    hasResume: true
   }
 ]
 

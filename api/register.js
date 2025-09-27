@@ -27,6 +27,10 @@ const RegistrationSchema = new mongoose.Schema({
   dietaryRestrictions: { type: String, maxlength: 200 },
   emergencyContact: { type: String, maxlength: 100 },
   emergencyPhone: { type: String, maxlength: 20 },
+  resumeUrl: { type: String, required: false },
+  resumeFileName: { type: String, required: false },
+  resumeUploadDate: { type: Date, required: false },
+  hasResume: { type: Boolean, default: false },
   registrationDate: { type: Date, default: Date.now },
   status: { type: String, enum: ['pending', 'confirmed', 'waitlisted'], default: 'pending' }
 })
@@ -59,7 +63,11 @@ export default async function handler(req, res) {
       experience,
       dietaryRestrictions,
       emergencyContact,
-      emergencyPhone
+      emergencyPhone,
+      resumeUrl,
+      resumeFileName,
+      resumeUploadDate,
+      hasResume
     } = req.body
 
     // Basic validation
@@ -119,6 +127,10 @@ export default async function handler(req, res) {
       dietaryRestrictions: dietaryRestrictions?.trim(),
       emergencyContact: emergencyContact?.trim(),
       emergencyPhone: emergencyPhone?.trim(),
+      resumeUrl: resumeUrl || null,
+      resumeFileName: resumeFileName || null,
+      resumeUploadDate: resumeUploadDate ? new Date(resumeUploadDate) : null,
+      hasResume: Boolean(hasResume && resumeUrl),
       status: 'pending'
     })
 

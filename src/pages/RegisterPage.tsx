@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { X } from 'lucide-react'
 import { mockAPI } from '../lib/mockData'
+import ResumeUpload from '../components/ResumeUpload'
 
 function RegisterPage() {
   const [formData, setFormData] = useState({
@@ -10,11 +11,27 @@ function RegisterPage() {
     email: '',
     school: ''
   })
+  const [resumeData, setResumeData] = useState<{
+    url: string
+    fileName: string
+    uploadDate: string
+  } | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [uploadError, setUploadError] = useState<string | null>(null)
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }))
+  }
+
+  const handleResumeUploadSuccess = (data: { url: string; fileName: string; uploadDate: string }) => {
+    setResumeData(data)
+    setUploadError(null)
+  }
+
+  const handleResumeUploadError = (error: string) => {
+    setUploadError(error)
+    setResumeData(null)
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -34,7 +51,18 @@ function RegisterPage() {
         throw new Error('Please enter a valid email address')
       }
 
-      const result = await mockAPI.register(formData)
+      // Include resume data in registration
+      const registrationData = {
+        ...formData,
+        ...(resumeData && {
+          resumeUrl: resumeData.url,
+          resumeFileName: resumeData.fileName,
+          resumeUploadDate: resumeData.uploadDate,
+          hasResume: true
+        })
+      }
+
+      const result = await mockAPI.register(registrationData)
 
       if (!result.success) {
         throw new Error('Registration failed')
@@ -47,6 +75,8 @@ function RegisterPage() {
         email: '',
         school: ''
       })
+      setResumeData(null)
+      setUploadError(null)
     } catch (error) {
       console.error('Registration error:', error)
       setSubmitStatus('error')
@@ -140,6 +170,19 @@ function RegisterPage() {
                 placeholder="Enter your school or university name"
                 required
               />
+            </div>
+
+            {/* Resume Upload */}
+            <div>
+              <ResumeUpload
+                onUploadSuccess={handleResumeUploadSuccess}
+                onUploadError={handleResumeUploadError}
+              />
+              {uploadError && (
+                <div className="mt-2 p-3 bg-red-500/20 border border-red-500/50 rounded-lg">
+                  <p className="text-red-300 text-sm">{uploadError}</p>
+                </div>
+              )}
             </div>
 
             {/* Submit Button */}
