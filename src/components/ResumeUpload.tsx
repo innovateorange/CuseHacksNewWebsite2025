@@ -29,12 +29,9 @@ function ResumeUpload({ onUploadSuccess, onUploadError }: ResumeUploadProps) {
       const formData = new FormData()
       formData.append('file', file)
 
-      const response = await fetch(`/api/upload/resume?filename=${encodeURIComponent(file.name)}`, {
+      const response = await fetch('/api/upload/resume', {
         method: 'POST',
-        body: file,
-        headers: {
-          'Content-Type': 'application/pdf',
-        },
+        body: formData,
       })
 
       if (!response.ok) {

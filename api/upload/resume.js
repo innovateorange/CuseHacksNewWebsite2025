@@ -1,4 +1,6 @@
 import { put } from '@vercel/blob'
+import formidable from 'formidable'
+import fs from 'fs'
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -6,40 +8,50 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Parse form data
-    const contentType = req.headers['content-type'] || ''
+    // Parse multipart form data
+    const form = formidable({
+      maxFileSize: 5 * 1024 * 1024, // 5MB
+      allowEmptyFiles: false,
+      multiples: false,
+    })
 
-    if (!contentType.includes('multipart/form-data')) {
-      return res.status(400).json({ error: 'Content-Type must be multipart/form-data' })
-    }
+    const [fields, files] = await form.parse(req)
+    const file = Array.isArray(files.file) ? files.file[0] : files.file
 
-    // For Vercel, we'll get the file as a buffer in the request
-    const { searchParams } = new URL(req.url, `http://${req.headers.host}`)
-    const filename = searchParams.get('filename')
-
-    if (!filename) {
-      return res.status(400).json({ error: 'Filename is required' })
+    if (!file) {
+      return res.status(400).json({ error: 'No file provided' })
     }
 
     // Validate file type
-    if (!filename.toLowerCase().endsWith('.pdf')) {
+    if (!file.originalFilename || !file.originalFilename.toLowerCase().endsWith('.pdf')) {
+      return res.status(400).json({ error: 'Only PDF files are allowed' })
+    }
+
+    if (file.mimetype !== 'application/pdf') {
       return res.status(400).json({ error: 'Only PDF files are allowed' })
     }
 
     // Create unique filename
     const timestamp = Date.now()
-    const uniqueFilename = `resumes/${timestamp}-${filename}`
+    const safeFilename = file.originalFilename.replace(/[^a-zA-Z0-9.-]/g, '_')
+    const uniqueFilename = `resumes/${timestamp}-${safeFilename}`
 
-    // Upload to Vercel Blob
-    const blob = await put(uniqueFilename, req, {
+    // Read file and upload to Vercel Blob
+    const fileBuffer = fs.readFileSync(file.filepath)
+
+    const blob = await put(uniqueFilename, fileBuffer, {
       access: 'public',
       contentType: 'application/pdf',
     })
 
+    // Clean up temp file
+    fs.unlinkSync(file.filepath)
+
     res.status(200).json({
       success: true,
       url: blob.url,
-      fileName: filename,
+      fileName: file.originalFilename,
+      size: file.size,
       uploadDate: new Date().toISOString()
     })
 
@@ -53,8 +65,6 @@ export default async function handler(req, res) {
 
 export const config = {
   api: {
-    bodyParser: {
-      sizeLimit: '5mb',
-    },
+    bodyParser: false, // Disable default body parser to use formidable
   },
 }
