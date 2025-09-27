@@ -1,6 +1,4 @@
 import { put } from '@vercel/blob'
-import formidable from 'formidable'
-import fs from 'fs'
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -8,57 +6,112 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Parse multipart form data
-    const form = formidable({
-      maxFileSize: 5 * 1024 * 1024, // 5MB
-      allowEmptyFiles: false,
-      multiples: false,
-    })
+    console.log('Upload request received')
+    console.log('Content-Type:', req.headers['content-type'])
 
-    const [fields, files] = await form.parse(req)
-    const file = Array.isArray(files.file) ? files.file[0] : files.file
+    const contentType = req.headers['content-type'] || ''
 
-    if (!file) {
-      return res.status(400).json({ error: 'No file provided' })
+    if (!contentType.includes('multipart/form-data')) {
+      console.log('Invalid content type:', contentType)
+      return res.status(400).json({ error: 'Content-Type must be multipart/form-data' })
+    }
+
+    // Extract boundary
+    const boundary = contentType.split('boundary=')[1]
+    if (!boundary) {
+      return res.status(400).json({ error: 'No boundary found in multipart data' })
+    }
+
+    console.log('Boundary:', boundary)
+
+    // Get the raw body
+    const chunks = []
+    for await (const chunk of req) {
+      chunks.push(chunk)
+    }
+    const buffer = Buffer.concat(chunks)
+
+    console.log('Received buffer size:', buffer.length)
+
+    // Parse multipart data properly
+    const boundaryBytes = Buffer.from(`\r\n--${boundary}`)
+    let fileBuffer = null
+    let filename = null
+
+    // Split buffer by boundary
+    let start = 0
+    while (start < buffer.length) {
+      const nextBoundary = buffer.indexOf(boundaryBytes, start)
+      if (nextBoundary === -1) break
+
+      const part = buffer.slice(start, nextBoundary)
+
+      // Find header section end (double CRLF)
+      const headerEnd = part.indexOf(Buffer.from('\r\n\r\n'))
+      if (headerEnd !== -1) {
+        const headers = part.slice(0, headerEnd).toString()
+
+        // Check if this part contains a file
+        if (headers.includes('filename=')) {
+          // Extract filename
+          const filenameMatch = headers.match(/filename="([^"]+)"/)
+          if (filenameMatch) {
+            filename = filenameMatch[1]
+            console.log('Extracted filename:', filename)
+          }
+
+          // Extract file data
+          fileBuffer = part.slice(headerEnd + 4) // Skip the \r\n\r\n
+          console.log('Extracted file size:', fileBuffer.length)
+          break
+        }
+      }
+
+      start = nextBoundary + boundaryBytes.length
+    }
+
+    if (!fileBuffer || !filename) {
+      return res.status(400).json({ error: 'No file data found' })
     }
 
     // Validate file type
-    if (!file.originalFilename || !file.originalFilename.toLowerCase().endsWith('.pdf')) {
+    if (!filename.toLowerCase().endsWith('.pdf')) {
       return res.status(400).json({ error: 'Only PDF files are allowed' })
     }
 
-    if (file.mimetype !== 'application/pdf') {
-      return res.status(400).json({ error: 'Only PDF files are allowed' })
+    // Validate file size
+    if (fileBuffer.length > 5 * 1024 * 1024) {
+      return res.status(400).json({ error: 'File size must be less than 5MB' })
     }
 
     // Create unique filename
     const timestamp = Date.now()
-    const safeFilename = file.originalFilename.replace(/[^a-zA-Z0-9.-]/g, '_')
+    const safeFilename = filename.replace(/[^a-zA-Z0-9.-]/g, '_')
     const uniqueFilename = `resumes/${timestamp}-${safeFilename}`
 
-    // Read file and upload to Vercel Blob
-    const fileBuffer = fs.readFileSync(file.filepath)
+    console.log('Uploading to blob:', uniqueFilename, 'Size:', fileBuffer.length)
 
+    // Upload to Vercel Blob with proper content length
     const blob = await put(uniqueFilename, fileBuffer, {
       access: 'public',
       contentType: 'application/pdf',
+      addRandomSuffix: false,
     })
 
-    // Clean up temp file
-    fs.unlinkSync(file.filepath)
+    console.log('Upload successful:', blob.url)
 
     res.status(200).json({
       success: true,
       url: blob.url,
-      fileName: file.originalFilename,
-      size: file.size,
+      fileName: filename,
+      size: fileBuffer.length,
       uploadDate: new Date().toISOString()
     })
 
   } catch (error) {
     console.error('Resume upload error:', error)
     res.status(500).json({
-      error: 'Failed to upload resume'
+      error: `Failed to upload resume: ${error.message}`
     })
   }
 }

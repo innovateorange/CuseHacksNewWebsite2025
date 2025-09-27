@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { Download, FileText, ExternalLink } from 'lucide-react'
+import { Download, FileText, ExternalLink, FileDown } from 'lucide-react'
 import { realAPI as mockAPI } from '../lib/api'
 
 interface Registration {
@@ -155,6 +155,41 @@ function AdminRegistrationsPage() {
     document.body.removeChild(link)
   }
 
+  // Download all resumes as ZIP
+  const downloadResumes = async () => {
+    const resumesWithFiles = registrations.filter(reg => reg.hasResume && reg.resumeUrl)
+
+    if (resumesWithFiles.length === 0) {
+      alert('No resumes available for download')
+      return
+    }
+
+    try {
+      // Create a simple ZIP-like download approach
+      // For now, we'll download individual files
+      // In a production environment, you'd want a proper ZIP creation service
+
+      for (const registration of resumesWithFiles) {
+        if (registration.resumeUrl && registration.resumeFileName) {
+          // Create a link to download each resume
+          const link = document.createElement('a')
+          link.href = registration.resumeUrl
+          link.download = `${registration.name.replace(/[^a-zA-Z0-9]/g, '_')}_${registration.resumeFileName}`
+          link.target = '_blank'
+          document.body.appendChild(link)
+          link.click()
+          document.body.removeChild(link)
+
+          // Add small delay between downloads to avoid overwhelming the browser
+          await new Promise(resolve => setTimeout(resolve, 500))
+        }
+      }
+    } catch (error) {
+      console.error('Error downloading resumes:', error)
+      alert('Failed to download resumes. Please try again.')
+    }
+  }
+
   if (!isAuthenticated) {
     return null // Will redirect
   }
@@ -171,7 +206,16 @@ function AdminRegistrationsPage() {
               className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 disabled:from-gray-600 disabled:to-gray-700 disabled:cursor-not-allowed text-white px-4 py-2 rounded-lg transition-all duration-200 flex items-center gap-2 font-medium"
             >
               <Download size={18} />
-              Export CSV ({registrations.length})
+              Download CSV
+            </button>
+            <button
+              onClick={downloadResumes}
+              disabled={registrations.filter(r => r.hasResume).length === 0}
+              className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 disabled:from-gray-600 disabled:to-gray-700 disabled:cursor-not-allowed text-white px-4 py-2 rounded-lg transition-all duration-200 flex items-center gap-2 font-medium"
+              title={`Download ${registrations.filter(r => r.hasResume).length} resumes`}
+            >
+              <FileDown size={18} />
+              Download Resumes ({registrations.filter(r => r.hasResume).length})
             </button>
             <Link
               to="/admin"
