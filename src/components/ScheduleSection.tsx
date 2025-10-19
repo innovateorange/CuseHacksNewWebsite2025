@@ -2,23 +2,24 @@ import { motion } from 'framer-motion'
 
 const ScheduleSection = () => {
   const day1Events = [
-    { time: "8:00 AM", event: "Check-in & Registration", description: "Grab your badge and swag" },
-    { time: "9:00 AM", event: "Opening Ceremony", description: "Welcome and kickoff" },
-    { time: "10:00 AM", event: "Hacking Begins", description: "Start building your projects" },
-    { time: "12:00 PM", event: "Lunch", description: "Catered food for all participants" },
-    { time: "2:00 PM", event: "Workshop: AI Integration", description: "Learn to add AI to your project" },
-    { time: "6:00 PM", event: "Dinner", description: "Refuel for the night ahead" },
-    { time: "11:00 PM", event: "Late Night Snack", description: "Keep your energy up" },
+    { time: "8:30 AM", event: "Doors Open", description: "" },
+    { time: "9:00 AM", event: "Breakfast", description: "" },
+    { time: "11:45 AM", event: "Opening Ceremony", description: "" },
+    { time: "12:00 PM", event: "Hacking Begins!", description: "" },
+    { time: "12:00 PM", event: "Vibe Coding Workshop", description: "LSB 105, hosted by CUSEAI" },
+    { time: "6:00 PM", event: "Dinner", description: "" },
+    { time: "9:00 PM", event: "Monsters After Dinner", description: "" },
+    { time: "11:00 PM", event: "Movie Night", description: "" },
   ]
 
   const day2Events = [
-    { time: "12:00 AM", event: "Midnight Activities", description: "Surprise events to keep you awake" },
-    { time: "7:00 AM", event: "Breakfast", description: "Start your day right" },
-    { time: "9:00 AM", event: "Hacking Ends", description: "Pencils down! Finish your projects" },
-    { time: "10:00 AM", event: "Judging Begins", description: "Present to our panel of judges" },
-    { time: "12:00 PM", event: "Lunch", description: "Final meal together" },
-    { time: "1:00 PM", event: "Closing Ceremony", description: "Awards and recognitions" },
-    { time: "2:30 PM", event: "Hackathon Ends", description: "See you next year!" },
+    { time: "8:00 AM", event: "Morning Snacks", description: "" },
+    { time: "12:30 PM", event: "Hacking Ends", description: "" },
+    { time: "1:00 PM", event: "Project Presentations Begin", description: "" },
+    { time: "3:30 PM", event: "Judging Ends", description: "" },
+    { time: "4:00 PM", event: "Closing Ceremony", description: "" },
+    { time: "4:15 PM", event: "Prize Giveaway", description: "" },
+    { time: "4:30 PM", event: "Event Wrap-Up", description: "" },
   ]
 
   const EventCard = ({ events, title, color }: { events: typeof day1Events, title: string, color: string }) => (
