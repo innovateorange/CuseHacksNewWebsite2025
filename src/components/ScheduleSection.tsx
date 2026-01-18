@@ -1,67 +1,10 @@
 import { motion } from 'framer-motion'
 
 const ScheduleSection = () => {
-  const day1Events = [
-    { time: "8:30 AM", event: "Doors Open", description: "" },
-    { time: "9:00 AM", event: "Breakfast", description: "" },
-    { time: "11:45 AM", event: "Opening Ceremony", description: "" },
-    { time: "12:00 PM", event: "Hacking Begins!", description: "" },
-    { time: "12:00 PM", event: "Vibe Coding Workshop", description: "LSB 105, hosted by CUSEAI" },
-    { time: "6:00 PM", event: "Dinner", description: "" },
-    { time: "9:00 PM", event: "Monsters After Dinner", description: "" },
-    { time: "11:00 PM", event: "Movie Night", description: "" },
-  ]
-
-  const day2Events = [
-    { time: "8:00 AM", event: "Morning Snacks", description: "" },
-    { time: "12:30 PM", event: "Hacking Ends", description: "" },
-    { time: "1:00 PM", event: "Project Presentations Begin", description: "" },
-    { time: "3:30 PM", event: "Judging Ends", description: "" },
-    { time: "4:00 PM", event: "Closing Ceremony", description: "" },
-    { time: "4:15 PM", event: "Prize Giveaway", description: "" },
-    { time: "4:30 PM", event: "Event Wrap-Up", description: "" },
-  ]
-
-  const EventCard = ({ events, title, color }: { events: typeof day1Events, title: string, color: string }) => (
-    <motion.div 
-      initial={{ opacity: 0, x: title.includes('1') ? -20 : 20 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.6 }}
-      viewport={{ once: true }}
-      className={`bg-gradient-to-b from-${color}/20 to-${color}/5 backdrop-blur-md rounded-xl p-4 sm:p-6 border border-${color}/30 shadow-[0_0_15px_rgba(231,37,133,0.3)]`}
-    >
-      <h3 className={`text-lg sm:text-xl font-bold mb-4 sm:mb-6 font-rajdhani text-${color}`}>
-        {title}
-      </h3>
-
-      <div className="space-y-4 sm:space-y-6">
-        {events.map((item, index) => (
-          <motion.div 
-            key={index}
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: index * 0.1 }}
-            viewport={{ once: true }}
-            className="flex items-start"
-          >
-            <div className="w-16 sm:w-20 text-xs sm:text-sm font-medium text-white/80 flex-shrink-0">
-              {item.time}
-            </div>
-            <div className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-${color} mx-2 sm:mx-3 mt-1 flex-shrink-0`} />
-            <div className="flex-1">
-              <div className="font-medium text-white text-sm sm:text-base">{item.event}</div>
-              <div className="text-xs sm:text-sm text-white/70 mt-1 leading-relaxed">{item.description}</div>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-    </motion.div>
-  )
-
   return (
     <section id="schedule" className="py-20 px-4">
       <div className="max-w-4xl mx-auto">
-        <motion.h2 
+        <motion.h2
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -71,18 +14,20 @@ const ScheduleSection = () => {
           Schedule
         </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <EventCard 
-            events={day1Events}
-            title="Day 1: Saturday, Oct 25"
-            color="accent-500"
-          />
-          <EventCard 
-            events={day2Events}
-            title="Day 2: Sunday, Oct 26"
-            color="primary-500"
-          />
-        </div>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="bg-gradient-to-b from-purple-500/20 to-purple-500/5 backdrop-blur-md rounded-xl p-12 sm:p-16 border border-purple-500/30 shadow-[0_0_30px_rgba(86,11,173,0.3)]"
+        >
+          <p className="text-6xl sm:text-8xl font-bold text-center font-orbitron bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-accent-500">
+            TBD
+          </p>
+          <p className="text-white/70 text-center mt-6 text-lg">
+            Schedule coming soon!
+          </p>
+        </motion.div>
       </div>
     </section>
   )

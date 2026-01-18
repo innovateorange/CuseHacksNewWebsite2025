@@ -7,8 +7,8 @@ const router = express.Router()
 // Initialize default feature flags
 const initializeFeatureFlags = async () => {
   const defaultFlags = [
-    { key: 'projectSubmissionsEnabled', value: false, description: 'Allow users to submit hackathon projects' },
-    { key: 'registrationEnabled', value: true, description: 'Allow new users to register for the hackathon' },
+    { key: 'projectSubmissionsEnabled', value: false, description: 'Allow users to submit datathon projects' },
+    { key: 'registrationEnabled', value: true, description: 'Allow new users to register for the datathon' },
     { key: 'votingEnabled', value: true, description: 'Allow users to vote on submitted projects' },
     { key: 'adminPanelEnabled', value: true, description: 'Enable admin panel access' }
   ]

@@ -72,7 +72,7 @@ function SubmitPage() {
             
             <h2 className="text-2xl font-bold text-white mb-4">Submit on DevPost</h2>
             <p className="text-white/70 mb-8 leading-relaxed">
-              All project submissions for CuseHacks 2025 are handled through DevPost. 
+              All project submissions for CuseHacks 2026 are handled through DevPost. 
               Click the button below to be redirected to our official DevPost page where 
               you can submit your project and compete for amazing prizes!
             </p>

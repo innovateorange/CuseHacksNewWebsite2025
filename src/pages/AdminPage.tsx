@@ -295,7 +295,7 @@ function AdminPage() {
               className="bg-gradient-to-b from-green-500/20 to-green-500/5 backdrop-blur-md rounded-xl p-6 border border-green-500/30 text-left hover:bg-green-500/10 transition-colors"
             >
               <h2 className="text-xl font-bold text-green-400 mb-2">Registrations</h2>
-              <p className="text-white/70 text-sm">View and manage hackathon registrations</p>
+              <p className="text-white/70 text-sm">View and manage datathon registrations</p>
             </button>
             <button
               onClick={() => window.location.href = '/admin/messages'}
@@ -317,7 +317,7 @@ function AdminPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <h4 className="text-white font-medium">Project Submissions</h4>
-                  <p className="text-white/70 text-sm">Allow users to submit their hackathon projects</p>
+                  <p className="text-white/70 text-sm">Allow users to submit their datathon projects</p>
                 </div>
                 <button
                   onClick={() => updateFlag('projectSubmissionsEnabled', !flags.projectSubmissionsEnabled)}
@@ -336,7 +336,7 @@ function AdminPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <h4 className="text-white font-medium">User Registration</h4>
-                  <p className="text-white/70 text-sm">Allow new users to register for the hackathon</p>
+                  <p className="text-white/70 text-sm">Allow new users to register for the datathon</p>
                 </div>
                 <button
                   onClick={() => updateFlag('registrationEnabled', !flags.registrationEnabled)}

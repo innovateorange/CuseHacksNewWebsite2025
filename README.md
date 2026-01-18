@@ -1,6 +1,6 @@
 # CuseHacks Website
 
-A modern, full-stack web application for Syracuse University's premier hackathon event.
+A modern, full-stack web application for Syracuse University's premier datathon event.
 
 ## 🚀 Tech Stack
 

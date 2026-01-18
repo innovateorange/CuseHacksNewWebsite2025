@@ -108,7 +108,7 @@ function ProjectsPage() {
                 Project Showcase
               </h1>
               <p className="text-white/80 text-lg mb-8">
-                Discover the amazing projects created at CuseHacks 2025
+                Discover the amazing projects created at CuseHacks 2026
               </p>
               
               <div className="flex flex-wrap justify-center gap-4">

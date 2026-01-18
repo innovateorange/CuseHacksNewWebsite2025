@@ -7,32 +7,32 @@ const FAQSection = () => {
 
   const faqItems = [
     {
-      question: "What is a Hackathon?",
-      answer: "A hackathon is a 24-hour coding competition in which you or your team create a project from scratch and compete against other participants for prizes!",
+      question: "What is a Datathon?",
+      answer: "A datathon is a 24-hour data science competition in which you or your team create a project from scratch and compete against other participants for prizes!",
     },
     {
       question: "What type of workshops do you host?",
       answer: "We offer weekly workshops on various topics not included in core courses, such as Leetcode and Machine Learning.",
     },
     {
-      question: "Do I need a team for CuseHacks 2025?",
+      question: "Do I need a team for CuseHacks 2026?",
       answer: "No, you don't need a team for CuseHacks. You can compete solo!",
     },
     {
       question: "Where is CuseHacks going to be?",
-      answer: "CuseHacks is being held in the Life Science Atrium from Saturday-Sunday on October 25th-26th.",
+      answer: "CuseHacks is being held in the Life Science Atrium from Saturday-Sunday on February 21st-22nd.",
     },
     {
       question: "What do I need to bring?",
-      answer: "Bring your laptop, charger and some hackathon spirit!",
+      answer: "Bring your laptop, charger and some datathon spirit!",
     },
     {
       question: "Where and when are the workshops?",
       answer: "Our workshops are every Wednesday in Link Hall Room 160 at 6:30 pm. Come join us!",
     },
     {
-      question: "Can I volunteer for CuseHacks 2025?",
-      answer: "Yes, you can sign up as a volunteer for CuseHacks 2025!",
+      question: "Can I volunteer for CuseHacks 2026?",
+      answer: "Yes, you can sign up as a volunteer for CuseHacks 2026!",
     },
     {
       question: "Can I participate if I have no experience?",
@@ -40,7 +40,7 @@ const FAQSection = () => {
     },
     {
       question: "What are the rules?",
-      answer: "Submissions are automatically entered for 'Best Overall.' To qualify for other categories, select them during submission. Projects must be created solely for CuseHacks 2025—no prior work allowed. Hackers may only contribute to one team. Boilerplate code is allowed if properly licensed and documented. Code is required for all categories except 'Best Design.'",
+      answer: "Submissions are automatically entered for 'Best Overall.' To qualify for other categories, select them during submission. Projects must be created solely for CuseHacks 2026—no prior work allowed. Hackers may only contribute to one team. Boilerplate code is allowed if properly licensed and documented. Code is required for all categories except 'Best Design.'",
     },
     {
       question: "Are walk-ins accepted?",

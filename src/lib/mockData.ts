@@ -164,7 +164,7 @@ export const mockContactMessages = [
     _id: '1',
     name: 'Sarah Wilson',
     email: 'sarah@example.com',
-    subject: 'Question about hackathon rules',
+    subject: 'Question about datathon rules',
     message: 'Hi, I was wondering if we can use existing open source libraries in our project?',
     submittedAt: '2025-01-15T09:30:00Z',
     isRead: false,
@@ -175,7 +175,7 @@ export const mockContactMessages = [
     name: 'Alex Chen',
     email: 'alex@university.edu',
     subject: 'Team formation help',
-    message: 'I\'m looking for teammates for the hackathon. Are there any Discord channels for team matching?',
+    message: 'I\'m looking for teammates for the datathon. Are there any Discord channels for team matching?',
     submittedAt: '2025-01-14T16:45:00Z',
     isRead: true,
     status: 'replied' as const

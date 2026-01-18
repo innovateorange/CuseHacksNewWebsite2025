@@ -27,7 +27,7 @@ const AboutSection = () => {
                 What is Innovate Orange?
               </h3>
               <p className="mb-4">
-                Innovate Orange is the first and only student-run hackathon organization at Syracuse University. 
+                Innovate Orange is the first and only student-run datathon organization at Syracuse University. 
                 We have a community of students who like to create things and help others do the same.
               </p>
             </div>
@@ -46,8 +46,8 @@ const AboutSection = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mt-4 sm:mt-6">
               <div className="bg-[#0a0a1a]/50 rounded-lg p-3 sm:p-4 border border-accent-500/20">
-                <h4 className="text-base sm:text-lg font-semibold text-accent-500 mb-2">CuseHacks 2025</h4>
-                <p className="text-sm leading-relaxed">A 24-hour hackathon event where people come together to innovate, create, and build amazing projects while competing for prizes!</p>
+                <h4 className="text-base sm:text-lg font-semibold text-accent-500 mb-2">CuseHacks 2026</h4>
+                <p className="text-sm leading-relaxed">A 24-hour datathon event where people come together to innovate, create, and build amazing projects while competing for prizes!</p>
               </div>
               <div className="bg-[#0a0a1a]/50 rounded-lg p-3 sm:p-4 border border-primary-500/20">
                 <h4 className="text-base sm:text-lg font-semibold text-primary-500 mb-2">Weekly Workshops</h4>

@@ -67,11 +67,11 @@ const HeroSection = () => {
           className="space-y-6"
         >
           <p className="text-xl sm:text-2xl md:text-3xl text-white/90 font-medium font-orbitron mb-6 sm:mb-8">
-            October 25-26th 2025
+            February 21-22nd 2026
           </p>
 
           <p className="text-base sm:text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-6 sm:mb-8 px-4 font-orbitron">
-            Syracuse University's Premier Hackathon
+            Syracuse University's Premier Datathon
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">

@@ -94,10 +94,10 @@ function RegisterPage() {
           className="text-center mb-12"
         >
           <h1 className="text-5xl font-bold font-orbitron mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-accent-500">
-            Register for CuseHacks 2025
+            Register for CuseHacks 2026
           </h1>
           <p className="text-white/80 text-lg">
-            Join us for Syracuse University's Premier Hackathon on October 25-26th, 2025
+            Join us for Syracuse University's Premier Datathon on February 21-22nd, 2026
           </p>
         </motion.div>
 
@@ -119,7 +119,7 @@ function RegisterPage() {
             <div className="mb-6 p-4 bg-green-500/20 border border-green-500/50 rounded-lg">
               <h3 className="font-bold text-green-400 mb-2">🎉 Registration Successful!</h3>
               <p className="text-green-300">
-                Thank you for registering! We'll send you more details about CuseHacks 2025 soon.
+                Thank you for registering! We'll send you more details about CuseHacks 2026 soon.
                 Keep an eye on your email for updates and important information.
               </p>
             </div>
